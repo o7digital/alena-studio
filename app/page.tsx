@@ -169,8 +169,9 @@ export default function Home() {
           aria-expanded={menuOpen}
           aria-controls="main-navigation"
         >
-          <span />
-          <span />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
         </button>
         <nav
           id="main-navigation"
