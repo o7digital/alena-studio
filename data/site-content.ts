@@ -13,7 +13,7 @@ export type Product = {
 };
 
 export const siteContent = {
-  name: "Alena Studio",
+  name: "Sachetto",
   location: "San Diego, California",
   description:
     "Handcrafted leather and woven bags, designed in San Diego in considered, limited runs.",
@@ -33,7 +33,7 @@ export const products: Product[] = [
     materials: "Handwoven palm · Italian leather",
     priceCents: 28500,
     currency: "USD",
-    image: "/images/alena-collection.png",
+    image: "/images/sachetto-collection.png",
     imageAlt: "Woven tote with dark leather trim on an ivory stone plinth",
     cropClass: "crop-0",
     isDemo: true,
@@ -46,7 +46,7 @@ export const products: Product[] = [
     materials: "Soft ivory leather",
     priceCents: 24000,
     currency: "USD",
-    image: "/images/alena-collection.png",
+    image: "/images/sachetto-collection.png",
     imageAlt: "Ivory leather shoulder bag photographed in warm natural light",
     cropClass: "crop-1",
     isDemo: true,
@@ -59,7 +59,7 @@ export const products: Product[] = [
     materials: "Cognac leather · Braided handle",
     priceCents: 32000,
     currency: "USD",
-    image: "/images/alena-collection.png",
+    image: "/images/sachetto-collection.png",
     imageAlt: "Cognac leather bag with braided handle on an ivory stone plinth",
     cropClass: "crop-2",
     isDemo: true,

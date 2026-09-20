@@ -1,5 +1,5 @@
 {
-  "name": "alena-studio-san-diego",
+  "name": "sachetto-san-diego",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -43,5 +43,5 @@
     "wrangler": "4.92.0"
   },
   "type": "module",
-  "displayName": "Alena Studio — San Diego"
+  "displayName": "Sachetto — San Diego"
 }

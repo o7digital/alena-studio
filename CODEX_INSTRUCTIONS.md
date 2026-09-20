@@ -1,8 +1,8 @@
-# Instructions pour Codex — Alena Studio
+# Instructions pour Codex — Sachetto
 
 ## Objectif
 
-Intégrer le mockup premium **Alena Studio** fourni dans ce projet afin de créer le futur site e-commerce de la cliente, basée à San Diego et spécialisée dans les sacs artisanaux en cuir et crochet.
+Intégrer le mockup premium **Sachetto** fourni dans ce projet afin de créer le futur site e-commerce de la cliente, basée à San Diego et spécialisée dans les sacs artisanaux en cuir et crochet.
 
 Le résultat actuel sert de direction artistique validée. Il faut préserver son rendu « quiet luxury » californien : ivoire minéral, espresso, cognac, typographie éditoriale, grands espaces, lumière chaude et animations discrètes.
 

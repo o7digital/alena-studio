@@ -191,9 +191,8 @@ export default function Home() {
             Search
           </button>
         </nav>
-        <a className="brand" href="#top" aria-label="Alena Studio home">
-          <span>ALENA</span>
-          <small>STUDIO</small>
+        <a className="brand" href="#top" aria-label="Sachetto home">
+          <span>SACHETTO</span>
         </a>
         <nav className="nav-right" aria-label="Shopping navigation">
           <button onClick={() => setPanel("search")}>Search</button>
@@ -215,7 +214,7 @@ export default function Home() {
         </section>
 
         <section className="manifesto" aria-labelledby="manifesto-title">
-          <p className="eyebrow">The Alena point of view</p>
+          <p className="eyebrow">The Sachetto point of view</p>
           <h2 id="manifesto-title">Objects of <em>quiet confidence,</em><br />made for a life in motion.</h2>
           <p>Thoughtful proportions. Honest materials. Every piece is designed in our San Diego studio and finished by hand in considered, limited runs.</p>
         </section>
@@ -238,7 +237,7 @@ export default function Home() {
             <p className="eyebrow">From the maker&apos;s hands · 02</p>
             <h2 id="story-title">A personal study<br />in form and feeling.</h2>
             <blockquote>“I wanted to create the kind of bag you reach for without thinking — then keep for years.”</blockquote>
-            <p>Alena began with one silhouette, a few meters of leather and a belief that everyday pieces can still feel deeply special. Each design balances strength with softness, tradition with a distinctly modern ease.</p>
+            <p>Sachetto began with one silhouette, a few meters of leather and a belief that everyday pieces can still feel deeply special. Each design balances strength with softness, tradition with a distinctly modern ease.</p>
             <a className="outline-button" href="#craft">Discover the craft <Arrow dark /></a>
           </div>
         </section>
@@ -272,13 +271,13 @@ export default function Home() {
       </main>
 
       <footer>
-        <div className="footer-brand"><span>ALENA</span><small>STUDIO</small></div>
+        <div className="footer-brand"><span>SACHETTO</span></div>
         <div className="footer-links">
           <div><h3>Explore</h3><a href="#collection">Shop all</a><a href="#story">Our story</a><a href="#craft">The craft</a></div>
           <div><h3>Client care</h3><button onClick={() => showPendingContent("Shipping & returns")}>Shipping & returns</button><button onClick={() => showPendingContent("Care guide")}>Care guide</button><button onClick={() => showPendingContent("Contact")}>Contact</button></div>
           <div><h3>Follow</h3><button onClick={() => showPendingContent("Instagram")}>Instagram</button><button onClick={() => showPendingContent("Pinterest")}>Pinterest</button></div>
         </div>
-        <div className="footer-bottom"><span>© 2026 Alena Studio · Preview</span><span>Designed in San Diego, California</span><button onClick={() => showPendingContent("Privacy & terms")}>Privacy · Terms</button></div>
+        <div className="footer-bottom"><span>© 2026 Sachetto · Preview</span><span>Designed in San Diego, California</span><button onClick={() => showPendingContent("Privacy & terms")}>Privacy · Terms</button></div>
       </footer>
 
       {panel && (
@@ -286,7 +285,7 @@ export default function Home() {
           <button className="panel-backdrop" onClick={() => setPanel(null)} aria-label="Close panel" tabIndex={-1} />
           <aside className="side-panel" role="dialog" aria-modal="true" aria-labelledby="panel-title">
             <div className="panel-header">
-              <div><p className="eyebrow">Alena Studio preview</p><h2 id="panel-title">{panel === "cart" ? "Your edit" : "Search the edit"}</h2></div>
+              <div><p className="eyebrow">Sachetto preview</p><h2 id="panel-title">{panel === "cart" ? "Your edit" : "Search the edit"}</h2></div>
               <button ref={closeButtonRef} className="panel-close" onClick={() => setPanel(null)} aria-label="Close panel">×</button>
             </div>
 

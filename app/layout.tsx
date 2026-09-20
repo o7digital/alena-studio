@@ -11,34 +11,34 @@ const metadataBase = new URL(
 export const metadata: Metadata = {
   metadataBase,
   title: {
-    default: "Alena Studio — Handcrafted Bags in San Diego",
-    template: "%s — Alena Studio",
+    default: "Sachetto — Handcrafted Bags in San Diego",
+    template: "%s — Sachetto",
   },
   description:
     "Handcrafted leather and woven bags, designed in San Diego in considered, limited runs.",
-  applicationName: "Alena Studio",
+  applicationName: "Sachetto",
   keywords: ["handcrafted bags", "leather bags", "woven bags", "San Diego"],
   openGraph: {
-    title: "Alena Studio — Handcrafted Bags in San Diego",
+    title: "Sachetto — Handcrafted Bags in San Diego",
     description:
       "Handcrafted leather and woven bags, designed in San Diego in considered, limited runs.",
     type: "website",
     locale: "en_US",
-    siteName: "Alena Studio",
+    siteName: "Sachetto",
     images: [
       {
-        url: "/images/alena-hero.png",
+        url: "/images/sachetto-hero.png",
         width: 1680,
         height: 945,
-        alt: "Alena Studio woven and cognac leather handbag",
+        alt: "Sachetto woven and cognac leather handbag",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alena Studio — Handcrafted Bags in San Diego",
+    title: "Sachetto — Handcrafted Bags in San Diego",
     description: "Handcrafted leather and woven bags, designed in San Diego.",
-    images: ["/images/alena-hero.png"],
+    images: ["/images/sachetto-hero.png"],
   },
   robots: { index: false, follow: false },
   other: { "codex-preview": "development" },
