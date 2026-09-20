@@ -66,8 +66,8 @@ export const products: Product[] = [
   },
 ];
 
-export function formatPrice(product: Product) {
-  return new Intl.NumberFormat("en-US", {
+export function formatPrice(product: Product, locale = "en-US") {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: product.currency,
     maximumFractionDigits: 0,
