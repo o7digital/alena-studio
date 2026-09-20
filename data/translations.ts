@@ -46,6 +46,15 @@ export type Translation = {
   emailPlaceholder: string;
   join: string;
   newsletterNote: string;
+  contactTitle?: string;
+  contactIntro?: string;
+  nameLabel?: string;
+  namePlaceholder?: string;
+  messageLabel?: string;
+  messagePlaceholder?: string;
+  sendMessage?: string;
+  contactSuccess?: string;
+  contactError?: string;
   explore: string;
   clientCare: string;
   follow: string;

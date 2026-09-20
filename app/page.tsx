@@ -10,7 +10,9 @@ import {
 import { translations, type Language, type ProductTranslation } from "@/data/translations";
 
 type CartLine = { product: Product; quantity: number };
-type Panel = "cart" | "search" | "legal" | null;
+type Panel = "cart" | "search" | "legal" | "contact" | null;
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xbgldowb";
 
 function Arrow({ dark = false }: { dark?: boolean }) {
   return (
@@ -67,11 +69,18 @@ function ProductCard({
 export function SachettoPage({ language = "en" }: { language?: Language }) {
   const c = translations[language];
   const detailsToConfirm = language === "es" ? "Detalles por confirmar" : language === "it" ? "Dettagli da confermare" : "Details to be confirmed";
+  const contactCopy = language === "es"
+    ? { title: "Escribe al estudio", intro: "Cuéntanos qué tienes en mente. Te responderemos lo antes posible.", name: "Nombre", namePlaceholder: "Tu nombre", message: "Mensaje", messagePlaceholder: "¿Cómo podemos ayudarte?", submit: "Enviar mensaje", success: "Gracias — tu mensaje ha sido enviado.", error: "Algo salió mal. Inténtalo de nuevo." }
+    : language === "it"
+      ? { title: "Scrivi allo studio", intro: "Raccontaci cosa hai in mente. Ti risponderemo il prima possibile.", name: "Nome", namePlaceholder: "Il tuo nome", message: "Messaggio", messagePlaceholder: "Come possiamo aiutarti?", submit: "Invia messaggio", success: "Grazie — il tuo messaggio è stato inviato.", error: "Qualcosa è andato storto. Riprova." }
+      : { title: "Write to the studio", intro: "Tell us what is on your mind. We will get back to you as soon as possible.", name: "Name", namePlaceholder: "Your name", message: "Message", messagePlaceholder: "How can we help?", submit: "Send message", success: "Thank you — your message has been sent.", error: "Something went wrong. Please try again." };
   const [menuOpen, setMenuOpen] = useState(false);
   const [panel, setPanel] = useState<Panel>(null);
   const [cart, setCart] = useState<CartLine[]>([]);
   const [toast, setToast] = useState("");
   const [query, setQuery] = useState("");
+  const [contactSending, setContactSending] = useState(false);
+  const [contactStatus, setContactStatus] = useState<"idle" | "success" | "error">("idle");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const cartCount = cart.reduce((total, line) => total + line.quantity, 0);
@@ -153,10 +162,38 @@ export function SachettoPage({ language = "en" }: { language?: Language }) {
     </div>
   );
 
-  const submitNewsletter = (event: FormEvent<HTMLFormElement>) => {
+  const submitNewsletter = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    event.currentTarget.reset();
-    setToast("Preview only · No email was submitted");
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    formData.append("_subject", `Sachetto ${language.toUpperCase()} newsletter signup`);
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, { method: "POST", body: formData, headers: { Accept: "application/json" } });
+      if (!response.ok) throw new Error("Newsletter submission failed");
+      form.reset();
+      setToast(contactCopy.success);
+    } catch {
+      setToast(contactCopy.error);
+    }
+  };
+
+  const submitContact = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setContactSending(true);
+    setContactStatus("idle");
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    formData.append("_subject", `Sachetto ${language.toUpperCase()} contact message`);
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, { method: "POST", body: formData, headers: { Accept: "application/json" } });
+      if (!response.ok) throw new Error("Contact submission failed");
+      form.reset();
+      setContactStatus("success");
+    } catch {
+      setContactStatus("error");
+    } finally {
+      setContactSending(false);
+    }
   };
 
   const structuredData = {
@@ -308,7 +345,7 @@ export function SachettoPage({ language = "en" }: { language?: Language }) {
             <input id="email" name="email" type="email" inputMode="email" autoComplete="email" placeholder={c.emailPlaceholder} required />
             <button type="submit">{c.join} <Arrow dark /></button>
           </form>
-          <small>{c.newsletterNote}</small>
+          <small>{language === "es" ? "Tu correo se enviará de forma segura mediante Formspree." : language === "it" ? "La tua email sarà inviata in modo sicuro tramite Formspree." : "Your email will be sent securely via Formspree."}</small>
         </section>
       </main>
 
@@ -316,7 +353,7 @@ export function SachettoPage({ language = "en" }: { language?: Language }) {
         <div className="footer-brand"><span>SACHETTO</span></div>
         <div className="footer-links">
           <div><h3>{c.explore}</h3><a href="#collection">{c.shopAll}</a><a href="#story">{c.story}</a><a href="#craft">{c.craft}</a></div>
-          <div><h3>{c.clientCare}</h3><button onClick={() => showPendingContent(c.shipping)}>{c.shipping}</button><button onClick={() => showPendingContent(c.careGuide)}>{c.careGuide}</button><button onClick={() => showPendingContent(c.contact)}>{c.contact}</button></div>
+          <div><h3>{c.clientCare}</h3><button onClick={() => showPendingContent(c.shipping)}>{c.shipping}</button><button onClick={() => showPendingContent(c.careGuide)}>{c.careGuide}</button><button onClick={() => { setContactStatus("idle"); setPanel("contact"); }}>{c.contact}</button></div>
           <div><h3>{c.follow}</h3><button onClick={() => showPendingContent("Instagram")}>Instagram</button><button onClick={() => showPendingContent("Pinterest")}>Pinterest</button></div>
         </div>
         <div className="footer-bottom"><span>{c.previewCopyright}</span><span>{c.designedIn}</span><button onClick={() => setPanel("legal")}>{c.privacyNotice}</button></div>
@@ -327,11 +364,24 @@ export function SachettoPage({ language = "en" }: { language?: Language }) {
           <button className="panel-backdrop" onClick={() => setPanel(null)} aria-label="Close panel" tabIndex={-1} />
           <aside className="side-panel" role="dialog" aria-modal="true" aria-labelledby="panel-title">
             <div className="panel-header">
-              <div><p className="eyebrow">{panel === "legal" ? c.legal.eyebrow : c.preview}</p><h2 id="panel-title">{panel === "cart" ? c.yourEdit : panel === "legal" ? c.privacyNotice : c.searchEdit}</h2></div>
+              <div><p className="eyebrow">{panel === "legal" ? c.legal.eyebrow : panel === "contact" ? c.contact : c.preview}</p><h2 id="panel-title">{panel === "cart" ? c.yourEdit : panel === "legal" ? c.privacyNotice : panel === "contact" ? contactCopy.title : c.searchEdit}</h2></div>
               <button ref={closeButtonRef} className="panel-close" onClick={() => setPanel(null)} aria-label={c.close}>×</button>
             </div>
 
-            {panel === "legal" ? legalNotice : panel === "search" ? (
+            {panel === "contact" ? (
+              <form className="contact-panel" onSubmit={submitContact}>
+                <p>{contactCopy.intro}</p>
+                <label htmlFor="contact-name">{contactCopy.name}</label>
+                <input id="contact-name" name="name" type="text" placeholder={contactCopy.namePlaceholder} required />
+                <label htmlFor="contact-email">{c.emailLabel}</label>
+                <input id="contact-email" name="email" type="email" placeholder={c.emailPlaceholder} required />
+                <label htmlFor="contact-message">{contactCopy.message}</label>
+                <textarea id="contact-message" name="message" placeholder={contactCopy.messagePlaceholder} rows={6} required />
+                <button type="submit" disabled={contactSending}>{contactSending ? "…" : contactCopy.submit}</button>
+                {contactStatus === "success" && <p className="form-status success">{contactCopy.success}</p>}
+                {contactStatus === "error" && <p className="form-status error">{contactCopy.error}</p>}
+              </form>
+            ) : panel === "legal" ? legalNotice : panel === "search" ? (
               <div className="search-panel">
                 <label htmlFor="search-products">{c.searchProducts}</label>
                 <input id="search-products" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={c.searchPlaceholder} autoFocus />

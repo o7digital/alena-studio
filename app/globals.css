@@ -82,6 +82,15 @@ footer { background:#1f1d19;color:#e9e2d7;padding:95px 5vw 28px}.footer-brand{fo
 .panel-header h2 { margin:0; font:400 42px/1 Georgia,serif; letter-spacing:-.04em; }
 .panel-close { border:0; background:transparent; cursor:pointer; font:300 34px/1 Arial,sans-serif; padding:0 4px; }
 .search-panel,.cart-panel { min-height:0; flex:1; display:flex; flex-direction:column; }
+.contact-panel { min-height:0; flex:1; overflow:auto; padding:30px 4px 0 0; display:flex; flex-direction:column; gap:10px; }
+.contact-panel>p { margin:0 0 16px; color:#655f56; font-family:Georgia,serif; line-height:1.65; font-size:15px; }
+.contact-panel label { margin-top:12px; font-size:9px; text-transform:uppercase; letter-spacing:.18em; }
+.contact-panel input,.contact-panel textarea { border:0; border-bottom:1px solid var(--ink); background:transparent; padding:13px 0; outline:0; resize:vertical; font:16px Georgia,serif; }
+.contact-panel textarea { border:1px solid var(--line); padding:13px; min-height:130px; }
+.contact-panel>button { margin-top:18px; border:0; background:#30231d; color:#f5eee5; padding:17px; cursor:pointer; font-size:8px; text-transform:uppercase; letter-spacing:.15em; }
+.contact-panel>button:disabled { opacity:.6; cursor:wait; }
+.form-status { margin:12px 0 0; font-size:11px; line-height:1.5; }
+.form-status.success { color:#55704d; }.form-status.error { color:#9a5d4d; }
 .legal-panel { min-height:0; flex:1; overflow:auto; padding:28px 4px 0 0; color:#655f56; font-family:Georgia,serif; line-height:1.65; font-size:14px; }
 .legal-updated { margin:0 0 28px; color:#827b71; font-family:Arial,sans-serif; font-size:8px; letter-spacing:.15em; text-transform:uppercase; }
 .legal-panel section { border-top:1px solid var(--line); padding:22px 0 8px; }
